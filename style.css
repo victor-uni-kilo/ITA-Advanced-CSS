@@ -1,0 +1,30 @@
+
+[href*="google"]{
+  color: green;
+}
+/* [target="_black"] ili: */
+[href*="link"]{
+  color: red;
+}
+
+/* nula = even */
+#second-div p:nth-child(even) {
+  color: red;
+}
+#second-div p:nth-child(odd) {
+  color: blue;
+}
+
+#first-div > p::after {
+  content: " - NEW";
+  color: yellow;
+}
+/* 
+  p:last-child samo gadja p u second-div:
+  p u first-div nije last child, 
+  dok se body, izgleda, ne smatra validnim
+  parentom zadnjeg p...
+*/
+body > p:last-of-type:hover {
+  font-style: italic;
+}

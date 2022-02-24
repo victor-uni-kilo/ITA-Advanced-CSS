@@ -1,0 +1,11 @@
+Bez ikakvih izmena na HTML kodu, napisati stilizaciju kojom će se obaviti sledeće:
+
+    -tekst svih linkova koji upućuju na neku od adresa koje pripadaju sajtu Google obojiti u zeleno;
+    -tekst linka koji upućuje na LINK group web sajt obojiti u crvenu boju;
+    -paragrafe unutar second-div elementa naizmenično obojiti u crvenu i plavu boju (Paragraph 4 crvena, Paragraph 5 plava, Paragraph 6 crvena boja...)
+    -na krajeve Paragrafa 2 i Paragrafa 3, korišćenjem CSS-a dodati tekst – NEW, žute boje;
+    -prelaskom miša preko Paragraph 10 elementa, njegov tekst treba da postane italic.
+
+Stilizaciju je moguće pisati unutar style elementa u HTML dokumentu, ili u zasebnom CSS fajlu.
+
+Napomena: Zadatak podići na GitHub, u okviru javnog repozitorijuma, pa voditelju dostaviti link do takvog repozitorijuma.
