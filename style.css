@@ -1,9 +1,10 @@
 :root {
-    --circ-radius: 60vmin;
+    --comp-size: 200px;
+    --circ-radius: calc(var(--comp-size) * 0.7);
     --ring-scale: 1.15;
-    /* centar kruga X,  Y */
-    --circ-centerX: calc(50vw -(var(--circ-radius) / 2));
-    --circ-centerY: calc(50vh -(var(--circ-radius) / 2));
+    --blur-radius: calc(var(--circ-radius) * 0.05);
+    /* centar X,  Y */
+    --comp-center: calc((var(--comp-size) / 2) - (var(--circ-radius) / 2) );
     /* color */
     --circ-col-1: #fb5dad;
     --circ-col-2: #55fb9f;
@@ -22,28 +23,49 @@ body{
     background-color:  var(--col-dark);
 }
 
+/* FLEXBOX DEMO */
+
+#main-container{
+  margin: 20vh 10vw;
+  padding: 2vw;
+  height: min-content;
+  width: 76vw;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+
+  border: 1px solid var(--circ-col-1);
+  border-radius: 1rem;
+}
+
+/* SPINNER KOMPONENTA CSS */
+
+.spinner-component {
+  position: relative;
+  width: var(--comp-size);
+  height: var(--comp-size);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* osobine kruga: */
 [class*="circle"], [class*="circle"]::after {
-  /* preklapanje */
   position: absolute;
-  /* dimenzije */
   width: var(--circ-radius);
   height: var(--circ-radius);
-  /* ...kruga */
   border-radius: 50%;
-}
-/* centriranje */
-body > [class*="circle"] {
-  top: var(--circ-centerY);
-  left: var(--circ-centerX);
 }
 
 .circle-container {
-  /* sakriti gradijent : border-image ne postuje border-radius */
   background-color: var(--col-dark);
 }
 
- /* OBRUCH */
+ /* prsten */
 .circle-gradient, .circle-gradient::after{
   background-image: var(--lin-grad);
  }
@@ -51,25 +73,23 @@ body > [class*="circle"] {
  .circle-gradient {
   z-index: -1;
   transform: scale(var(--ring-scale));
-
   animation: spin calc(var(--anim-dur) / 2) linear infinite;
  }
 
  .circle-gradient::after{
   content: "";
   display: block;
-
-  filter: blur(calc(var(--circ-radius) * 0.1));
+  filter: blur(var(--blur-radius));
  }
 
- /* PULSE u SREDINI */
+ /* puls u sredini */
 .circle-pulse{
-    background-color: var(--circ-col-3);
-    opacity: 0%;
-    animation: pulse var(--anim-dur) ease infinite;
+  background-color: var(--circ-col-3);
+  opacity: 0%;
+  animation: pulse var(--anim-dur) ease infinite;
 }
 
-.circle-pulse:first-child{
+.circle-pulse:last-child{
   animation-delay: calc(var(--anim-dur) / 2);
 }
 
