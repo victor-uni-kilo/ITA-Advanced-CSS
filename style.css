@@ -1,30 +1,95 @@
+:root {
+    --circ-radius: 60vmin;
+    --ring-scale: 1.15;
+    /* centar kruga X,  Y */
+    --circ-centerX: calc(50vw -(var(--circ-radius) / 2));
+    --circ-centerY: calc(50vh -(var(--circ-radius) / 2));
+    /* color */
+    --circ-col-1: #fb5dad;
+    --circ-col-2: #55fb9f;
+    --circ-col-3: #b97aff;
+    --col-dark: #050210;
+    /* linear gradient */
+    --lin-grad: linear-gradient(to bottom, var(--circ-col-1), var(--circ-col-2), var(--circ-col-3));
+    /* time */
+    --anim-dur: 2.5s;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color:  var(--col-dark);
+}
 
-[href*="google"]{
-  color: green;
+/* osobine kruga: */
+[class*="circle"], [class*="circle"]::after {
+  /* preklapanje */
+  position: absolute;
+  /* dimenzije */
+  width: var(--circ-radius);
+  height: var(--circ-radius);
+  /* ...kruga */
+  border-radius: 50%;
 }
-/* [target="_black"] ili: */
-[href*="link"]{
-  color: red;
+/* centriranje */
+body > [class*="circle"] {
+  top: var(--circ-centerY);
+  left: var(--circ-centerX);
 }
 
-/* nula = even */
-#second-div p:nth-child(even) {
-  color: red;
-}
-#second-div p:nth-child(odd) {
-  color: blue;
+.circle-container {
+  /* sakriti gradijent : border-image ne postuje border-radius */
+  background-color: var(--col-dark);
 }
 
-#first-div > p::after {
-  content: " - NEW";
-  color: yellow;
+ /* OBRUCH */
+.circle-gradient, .circle-gradient::after{
+  background-image: var(--lin-grad);
+ }
+
+ .circle-gradient {
+  z-index: -1;
+  transform: scale(var(--ring-scale));
+
+  animation: spin calc(var(--anim-dur) / 2) linear infinite;
+ }
+
+ .circle-gradient::after{
+  content: "";
+  display: block;
+
+  filter: blur(calc(var(--circ-radius) * 0.1));
+ }
+
+ /* PULSE u SREDINI */
+.circle-pulse{
+    background-color: var(--circ-col-3);
+    opacity: 0%;
+    animation: pulse var(--anim-dur) ease infinite;
 }
-/* 
-  p:last-child samo gadja p u second-div:
-  p u first-div nije last child, 
-  dok se body, izgleda, ne smatra validnim
-  parentom zadnjeg p...
-*/
-body > p:last-of-type:hover {
-  font-style: italic;
+
+.circle-pulse:first-child{
+  animation-delay: calc(var(--anim-dur) / 2);
+}
+
+/* animacija */
+@keyframes pulse {
+    0% {
+      transform: scale(0);
+      opacity: 0%;
+    }
+   75%{
+      opacity: 10%;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0%;
+    }
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
 }
