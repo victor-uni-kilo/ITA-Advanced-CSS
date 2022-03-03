@@ -1,0 +1,83 @@
+:root{
+  /* flexbox GENES */
+  --gen-track-count: 1;
+  --gen-gap-amount: 0.3; /* ^^^ 0 To 1 ^^^ */
+  /* flexbox DNA */
+  --flex-width: calc(100% / ( var(--gen-track-count) + (var(--gen-track-count) - 1 ) * var(--gen-gap-amount)) );
+  --flex-gap: calc(var(--flex-width) * var(--gen-gap-amount));
+}
+
+/* RESETS */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* SASS VARIABLES */
+$color-base: #6ba2d9;
+$color-labels: #faf7ff;
+
+
+
+@media screen and (min-device-width: 320px) {
+  :root{
+    --gen-track-count: 1;
+  }
+} 
+
+@media screen and (min-device-width: 701px) {
+  :root{
+    --gen-track-count: 2;
+    --gen-gap-amount: 0.05;
+  }
+} 
+
+@media screen and (min-device-width: 1201px) {
+  :root{
+    --gen-track-count: 5;
+    --gen-gap-amount: 0.3;
+  }
+} 
+
+
+/* GENERAL */
+#wrapper{
+  margin: auto;
+  width: 90%;
+}
+
+header{
+  background-color: blueviolet;
+}
+
+#gallery {
+  height: min-content;
+  background-color: pink;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--flex-gap);
+
+  .gallery-item {
+    width: var(--flex-width);
+    height: var(--flex-width);
+    border-radius: 5px;
+    overflow: hidden;
+  
+    .image-container {
+      width: 100%;
+      height: 80%;
+      background-color: $color-base;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+    .image-banner {
+      width: 100%;
+      height: 20%;
+      background-color: $color-labels;
+    }
+  }
+}
